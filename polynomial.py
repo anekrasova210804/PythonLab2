@@ -79,32 +79,32 @@ class Polynomial:
         return self
 
     def __call__(self, x):
-        sum = self.__coefficients[0]
-        for i in range(1,len(self.__coefficients)):
-            sum += self.__coefficients[i] * (x**i)
-        return sum
+        result_sum = self.__coefficients[0]
+        for i in range(1, len(self.__coefficients)):
+            result_sum += self.__coefficients[i] * (x ** i)
+        return result_sum
 
     def degree(self) -> int:
         return len(self.__coefficients) - 1
 
     def der(self, d=1):
-        if d == 1:
-            result_list = [0]*len(self.__coefficients)
-            for j in range(1, len(self.__coefficients)):
-                result_list[j - 1] += j * self.__coefficients[j]
+        if not d:
+            return self
+        if d > 0:
+            result_list = [self.__coefficients[i] * i for i in range(1, len(self.__coefficients))]
+            for i in range(1, d):
+                result_list = [result_list[i] * i for i in range(1, len(result_list))]
             return Polynomial(result_list)
-        else:
-            return NotImplemented
 
     def __mul__(self, other):
         if isinstance(other, Polynomial):
-            result_list = [0]*(len(other.__coefficients) + len(self.__coefficients))
+            result_list = [0] * (len(other.__coefficients) + len(self.__coefficients))
             for i in range(len(other.__coefficients)):
                 for j in range(len(self.__coefficients)):
-                    result_list[i+j] += other.__coefficients[i]*self.__coefficients[j]
+                    result_list[i + j] += other.__coefficients[i] * self.__coefficients[j]
 
         elif isinstance(other, int) or isinstance(other, float):
-            result_list = [0]*len(self.__coefficients)
+            result_list = [0] * len(self.__coefficients)
             for i in range(len(self.__coefficients)):
                 result_list[i] += self.__coefficients[i] * other
         else:
