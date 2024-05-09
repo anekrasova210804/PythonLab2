@@ -125,7 +125,7 @@ class Polynomial:
         return self
 
     def __next__(self):
-        if self.current > len(self.__coefficients):
+        if self.current >= len(self.__coefficients):
             raise StopIteration
         value = self.__coefficients[self.current]
         self.current += 1
