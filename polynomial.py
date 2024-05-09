@@ -64,7 +64,7 @@ class Polynomial:
         return Polynomial(result_list)
 
     def __radd__(self, other):
-        return Polynomial.__add__(other, self)
+        return Polynomial.__add__(Polynomial(other), self)
 
     def __iadd__(self, other):
         self.__coefficients = Polynomial.__add__(self, other).get_coefficients_as_list()
@@ -77,7 +77,7 @@ class Polynomial:
         return Polynomial.__add__(self, -other)
 
     def __rsub__(self, other):
-        return Polynomial.__add__(other, -self)
+        return Polynomial.__add__(Polynomial(other), -self)
 
     def __isub__(self, other):
         self.__coefficients = Polynomial.__sub__(self, other).get_coefficients_as_list()
@@ -99,6 +99,8 @@ class Polynomial:
             result_list = [self.__coefficients[i] * i for i in range(1, len(self.__coefficients))]
             for i in range(1, d):
                 result_list = [result_list[i] * i for i in range(1, len(result_list))]
+            if not result_list:
+                result_list = [0]*1
             return Polynomial(result_list)
 
     def __mul__(self, other):
@@ -117,7 +119,7 @@ class Polynomial:
         return Polynomial(result_list)
 
     def __rmul__(self, other):
-        return Polynomial.__mul__(other, self)
+        return Polynomial.__mul__(Polynomial(other), self)
 
     def __imul__(self, other):
         self.__coefficients = Polynomial.__mul__(self, other).get_coefficients_as_list()

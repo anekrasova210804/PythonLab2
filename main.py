@@ -1,45 +1,30 @@
 from polynomial import Polynomial
 
-example1 = Polynomial([1, 2, 3])
-example2 = Polynomial({0: -3, 2: 1, 5: 4})
-example3 = Polynomial(1, 2, 3, 0, 0, 0, 5, 0, 0)
-example4 = Polynomial([1, 2, 3, 0, 0, 0, 5])
+poly_list = [Polynomial(0), Polynomial({0: -3, 2: 1, 5: 4}),
+             Polynomial(1, 2, 3, 0, 0, 0, 5, 0, 0), Polynomial([1, 2, 3, 0, 0, 0, 5])]
+for i in poly_list:
+    print("REPR:", repr(i), "STR:", i, "DEGREE:", i.degree())
+
 print()
-print(repr(example2))
-print(repr(example4))
-print()
-print(f"{example1} is {"not " if example1 != example2 else ""}equal to {example2}")
-print(f"{example3} is {"not " if example3 != example4 else ""}equal to {example4}")
-print()
-print(example1 + example2)
-print(example1 + example2 + 2)
-example1 += 2
-print(example1)
-print(-example1)
-example1 -= Polynomial(0, 0, 3)
-print(example1)
-print(example1.degree())
-print(example1 * example2)
-print()
-print(example2.der(0))
-print(example2.der())
-print(example2.der(2))
-print(example2.der(3))
-print(example2.der(4))
-print(example2(1))
-print(example2(2))
+print(f"{poly_list[0]} is {"not " if poly_list[0] != poly_list[1] else ""}equal to {poly_list[1]}")
+print(f"{poly_list[2]} is {"not " if poly_list[2] != poly_list[3] else ""}equal to {poly_list[3]}\n")
+
+print(f"({poly_list[1]}) + 3 = {poly_list[1] + 3}")
+print(f"({poly_list[2]}) + ({poly_list[3]}) = {poly_list[2] + poly_list[3]}")
+print(f"2*({poly_list[2]}) = {2 * poly_list[2]}")
+print(f"({poly_list[2]}) * ({poly_list[1]}) = {poly_list[2] * poly_list[1]}\n")
+# FROM GOOGLE:  (20x^11+5x^8+12x^7-7x^6+4x^5+3x^4+2x^3-8x^2-6x-3
+print(f"-({poly_list[3]}) = {-poly_list[3]}")
+print(f"({poly_list[2]}) - ({poly_list[3]}) = {poly_list[2] - poly_list[3]}")
+print(f"({poly_list[3]}) - ({poly_list[1]}) = {poly_list[3] - poly_list[1]}\n")
+
+print(f"({poly_list[2]}) from 0 = {poly_list[2](0)}")
+print(f"({poly_list[1]}) from 1 = {poly_list[1](1)}\n")
+
+for i in range(poly_list[2].degree() + 2):
+    print("DER", i, "IS", poly_list[2].der(i))
+
 print()
 
-example0 = Polynomial(0.0)
-print(repr(example0))
-print(example0)
-example20 = example0*example2
-print(example20)
-print()
-example6 = Polynomial({0: -3, 2: 1, 5: 4})
-example7 = Polynomial({0: 0})
-print(example7)
-print(Polynomial([0])+example7)
-for i in example6:
+for i in poly_list[2]:
     print(i)
-
