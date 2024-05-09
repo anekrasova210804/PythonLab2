@@ -29,7 +29,17 @@ print(example2.der(4))
 print(example2(1))
 print(example2(2))
 print()
+
+example0 = Polynomial(0.0)
+print(repr(example0))
+print(example0)
+example20 = example0*example2
+print(example20)
+print()
 example6 = Polynomial({0: -3, 2: 1, 5: 4})
+example7 = Polynomial({0: 0})
+print(example7)
+print(Polynomial([0])+example7)
 for i in example6:
     print(i)
 

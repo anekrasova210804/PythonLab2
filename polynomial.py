@@ -4,7 +4,10 @@ class Polynomial:
     def __init__(self, *_coefficients):
         self.current = 0
         if isinstance(_coefficients[0], float) or isinstance(_coefficients[0], int):
-            self.__coefficients = Polynomial.remove_trailing_zeros(list(_coefficients))
+            if len(_coefficients) == 1 and _coefficients[0] == 0:
+                self.__coefficients = [0] * 1
+            else:
+                self.__coefficients = Polynomial.remove_trailing_zeros(list(_coefficients))
         elif isinstance(_coefficients[0], list):
             self.__coefficients = Polynomial.remove_trailing_zeros(_coefficients[0])
         elif isinstance(_coefficients[0], dict):
@@ -31,7 +34,8 @@ class Polynomial:
 
         degree = len(self.__coefficients) - 1
         res = ""
-
+        if self.__coefficients == [0]:
+            return "0"
         for i in range(0, degree + 1):
             _coefficient = reversed_coefficient[i]
 
@@ -110,7 +114,6 @@ class Polynomial:
                 result_list[i] += self.__coefficients[i] * other
         else:
             return NotImplemented
-
         return Polynomial(result_list)
 
     def __rmul__(self, other):
@@ -138,7 +141,7 @@ class Polynomial:
     def remove_trailing_zeros(lst: list) -> list:
         if not lst:
             return lst
-        elif lst[-1] == 0:
+        elif lst[-1] == 0 and len(lst) != 1:
             return Polynomial.remove_trailing_zeros(lst[:-1])
         else:
             return lst
