@@ -2,6 +2,7 @@ class Polynomial:
     __coefficients: list[float]
 
     def __init__(self, *_coefficients):
+        self.current = 0
         if isinstance(_coefficients[0], float) or isinstance(_coefficients[0], int):
             self.__coefficients = Polynomial.remove_trailing_zeros(list(_coefficients))
         elif isinstance(_coefficients[0], list):
@@ -120,10 +121,15 @@ class Polynomial:
         return self
 
     def __iter__(self):
-        return 0, self.__coefficients[0]
+        self.current = 0
+        return self
 
     def __next__(self):
-        pass
+        if self.current > len(self.__coefficients):
+            raise StopIteration
+        value = self.__coefficients[self.current]
+        self.current += 1
+        return self.current-1, value
 
     def get_coefficients_as_list(self) -> list:
         return self.__coefficients

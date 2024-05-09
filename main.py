@@ -28,4 +28,8 @@ print(example2.der(3))
 print(example2.der(4))
 print(example2(1))
 print(example2(2))
+print()
+example6 = Polynomial({0: -3, 2: 1, 5: 4})
+for i in example6:
+    print(i)
 
